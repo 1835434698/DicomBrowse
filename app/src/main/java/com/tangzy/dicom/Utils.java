@@ -1,4 +1,4 @@
-package com.allin.dicom;
+package com.tangzy.dicom;
 
 import android.graphics.Bitmap;
 

@@ -24,7 +24,7 @@
 
 
 extern "C" JNIEXPORT jobject
-JNICALL Java_com_allin_dicomlib_FileLib_getDataFromDcm(JNIEnv *env,jobject , jstring inputPath_) {
+JNICALL Java_com_tangzy_dicomlib_FileLib_getDataFromDcm(JNIEnv *env,jobject , jstring inputPath_) {
                 __android_log_print(ANDROID_LOG_ERROR, "tag1", "hhhhhh");
         const char *input_pa_name =  env->GetStringUTFChars(inputPath_, JNI_FALSE);
         //dcmtk解析图像用的字典，下载有dcmtk源码，可在dcmdata\data里找到，未下载源码编译则拷贝assets目录下的到手机文件Download/中
@@ -46,7 +46,7 @@ JNICALL Java_com_allin_dicomlib_FileLib_getDataFromDcm(JNIEnv *env,jobject , jst
                 frameCount = 1;
              }
            //return frameCount;
-             jclass myClass = env->FindClass("com/allin/dicomlib/DcmData");
+             jclass myClass = env->FindClass("com/tangzy/dicomlib/DcmData");
              // 获取类的构造函数，记住这里是调用无参的构造函数
              jmethodID id = env->GetMethodID(myClass, "<init>", "()V");
              // 创建一个新的对象

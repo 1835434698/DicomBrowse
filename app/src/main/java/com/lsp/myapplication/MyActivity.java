@@ -8,9 +8,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-import com.allin.dicomlib.DcmData;
-import com.allin.dicomlib.FileLib;
-import com.allin.dicom.Utils;
+import com.tangzy.dicomlib.DcmData;
+import com.tangzy.dicomlib.FileLib;
+import com.tangzy.dicom.Utils;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.imebra.CodecFactory;
