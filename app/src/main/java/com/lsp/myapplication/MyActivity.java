@@ -53,16 +53,18 @@ public class MyActivity extends Activity {
         initView();
         initEvent();
         names.add("100.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715294.792225.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715651.14475.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715652.251428.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715653.470926.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715654.674745.dcm");
-        names.add("1.2.840.113619.2.369.4.2147483647.1550715655.915230.dcm");
-        names.add("img01.dcm");
-        names.add("ImageFileName001.dcm");
-        names.add("0002.DCM");
-        names.add("dr1.dcm");
+        names.add("101.dcm");
+        names.add("102.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715294.792225.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715651.14475.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715652.251428.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715653.470926.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715654.674745.dcm");
+//        names.add("1.2.840.113619.2.369.4.2147483647.1550715655.915230.dcm");
+//        names.add("img01.dcm");
+//        names.add("ImageFileName001.dcm");
+//        names.add("0002.DCM");
+//        names.add("dr1.dcm");
         btnLoadClicked(names.get(number));
     }
 
@@ -120,7 +122,7 @@ public class MyActivity extends Activity {
 
         btnLoadClicked(names.get(number));
         number++;
-        if (number == 11)
+        if (number == names.size()-1)
             number = 0;
 
     }
@@ -130,7 +132,7 @@ public class MyActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String testFileName = "/storage/emulated/0/Allinmd/linshi/"+fileName;
+                String testFileName = "/storage/emulated/0/Dcm/"+fileName;
                 readFile(testFileName); //读取本地路径中的dicom文件
             }
         }).start();
@@ -311,7 +313,7 @@ public class MyActivity extends Activity {
 
     private void showBitmap(String filePath, int frameIndex) throws Exception {
 
-        DataSet loadedDataSet = CodecFactory.load(filePath, 2048);
+        DataSet loadedDataSet = CodecFactory.load(filePath, 8000);
         Image image = loadedDataSet.getImageApplyModalityTransform(frameIndex);
         String colorSpace = image.getColorSpace();
         long width = image.getWidth();
