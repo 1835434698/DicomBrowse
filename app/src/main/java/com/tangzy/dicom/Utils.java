@@ -13,7 +13,6 @@ import com.imebra.VOILUT;
 import com.imebra.VOIs;
 import com.imebra.drawBitmapType_t;
 
-import java.io.ByteArrayInputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,39 +34,42 @@ public class Utils {
     }
 
 
-    public static TransformsChain applyTransformation(String colorSpace,
-                                                      DataSet
+    public static TransformsChain applyTransformation(
+            DataSet
                                                       loadedDataSet,
-                                                      Image image,
-                                                      Long width ,
-                                                      Long height){
+            Image image,
+            int wCenter,
+            int width ){
         TransformsChain chain = new TransformsChain();
 
-    if (ColorTransformsFactory.isMonochrome(colorSpace)){
+    if (ColorTransformsFactory.isMonochrome(image.getColorSpace())){
         VOILUT voilutTransform = new VOILUT();
-        VOIs vois = loadedDataSet.getVOIs();
-
-        List<LUT> luts = new ArrayList<>();
-
-        Long scanLUTs = 0l;
-
-        while (true){
-            try {
-                luts.add(loadedDataSet.getLUT(new TagId(0x0028,
-                        0x3010), scanLUTs));
-            }catch (Exception e){
-                break;
-            }
-            scanLUTs++;
-        }
-        if (!vois.isEmpty()){
-            voilutTransform.setCenterWidth(vois.get(0).getCenter(), vois.get(0).getWidth());
-        }else if (!luts.isEmpty()){
-            voilutTransform.setLUT(luts.get(0));
-        }else {
-            voilutTransform.applyOptimalVOI(image, 0, 0, width, height);
-        }
+        voilutTransform.setCenterWidth(wCenter, width);
         chain.addTransform(voilutTransform);
+//
+//        VOIs vois = loadedDataSet.getVOIs();
+//
+//        List<LUT> luts = new ArrayList<>();
+//
+//        Long scanLUTs = 0l;
+//
+//        while (true){
+//            try {
+//                luts.add(loadedDataSet.getLUT(new TagId(0x0028,
+//                        0x3010), scanLUTs));
+//            }catch (Exception e){
+//                break;
+//            }
+//            scanLUTs++;
+//        }
+//        if (!vois.isEmpty()){
+//            voilutTransform.setCenterWidth(vois.get(0).getCenter(), vois.get(0).getWidth());
+//        }else if (!luts.isEmpty()){
+//            voilutTransform.setLUT(luts.get(0));
+//        }else {
+//            voilutTransform.applyOptimalVOI(image, 0, 0, width, height);
+//        }
+//        chain.addTransform(voilutTransform);
     }
         return chain;
     }
